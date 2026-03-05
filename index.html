@@ -1,282 +1,295 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Users, 
-  Share2, 
-  Mail, 
-  MapPin, 
-  Calendar, 
-  ShieldCheck, 
-  ExternalLink,
-  ChevronRight,
-  Heart,
-  MessageCircle,
-  AlertCircle
-} from 'lucide-react';
-
-const App = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Sections data
-  const updates = [
-    { date: 'March 5, 2026', title: 'Community Solidarity Walk', location: 'City Center', description: 'Join us as we walk in silence to honor Aman and demand transparency.' },
-    { date: 'March 2, 2026', title: 'Petition Reaches 50k Signatures', location: 'Online', description: 'The global community is standing with us. Keep sharing.' },
-    { date: 'Feb 28, 2026', title: 'Official Statement Issued', location: 'Press', description: 'The family released an official statement regarding the current status of the case.' },
-  ];
-
-  const NavItem = ({ id, label }) => (
-    <button
-      onClick={() => setActiveTab(id)}
-      className={`px-4 py-2 font-medium transition-all ${
-        activeTab === id 
-          ? 'text-orange-500 border-b-2 border-orange-500' 
-          : 'text-gray-400 hover:text-white'
-      }`}
-    >
-      {label}
-    </button>
-  );
-
-  return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-orange-500 selection:text-white">
-      {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-neutral-900/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center font-bold text-lg">A</div>
-            <span className="font-bold text-xl tracking-tight hidden sm:block">JUSTICE FOR AMAN</span>
-          </div>
-          <div className="flex gap-2 sm:gap-6">
-            <NavItem id="home" label="Home" />
-            <NavItem id="story" label="The Case" />
-            <NavItem id="action" label="Take Action" />
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-10 pointer-events-none">
-           <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 to-transparent blur-3xl rounded-full transform scale-150"></div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice for Aman Basheer | Official Advocacy Site</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
         
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8 relative z-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-sm font-semibold uppercase tracking-wider">
-              <ShieldCheck size={16} />
-              Seeking Truth and Accountability
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-tight uppercase">
-              Justice For <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
-                Aman Basheer
-              </span>
-            </h1>
-            <p className="text-xl text-neutral-400 leading-relaxed max-w-xl">
-              Aman Basheer’s story is one of a bright future cut short. We demand a fair investigation, transparency from the authorities, and justice for a life that mattered.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="px-8 py-4 bg-orange-600 hover:bg-orange-500 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-900/20">
-                <Heart size={20} /> Sign the Petition
-              </button>
-              <button className="px-8 py-4 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2">
-                <Share2 size={20} /> Spread the Word
-              </button>
-            </div>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+        }
 
-            <div className="flex gap-8 items-center pt-4">
-              <div className="flex flex-col">
-                <span className="text-3xl font-bold">52.4K</span>
-                <span className="text-sm text-neutral-500 uppercase tracking-widest">Supporters</span>
-              </div>
-              <div className="w-px h-10 bg-neutral-800"></div>
-              <div className="flex flex-col">
-                <span className="text-3xl font-bold">#ഇരയോടൊപ്പം</span>
-                <span className="text-sm text-neutral-500 uppercase tracking-widest font-sans">With the Victim</span>
-              </div>
-            </div>
-          </div>
+        .gradient-text {
+            background: linear-gradient(to right, #f97316, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-orange-600/20 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition duration-1000"></div>
-            <div className="relative bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 shadow-2xl">
-              {/* Poster Representation */}
-              <div className="aspect-[4/5] bg-neutral-800 flex flex-col items-center justify-center relative overflow-hidden">
-                {/* Visual mock of the provided poster */}
-                <div className="absolute inset-0 bg-neutral-900">
-                  <div className="h-2/3 bg-neutral-800 relative">
-                    {/* Placeholder for Aman's photo */}
-                    <div className="absolute inset-0 flex items-center justify-center p-12">
-                      <div className="w-full h-full rounded-2xl border-4 border-white/10 flex items-center justify-center bg-neutral-700/50 backdrop-blur-sm overflow-hidden">
-                        <img 
-                          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" 
-                          alt="In Memory" 
-                          className="w-full h-full object-cover grayscale brightness-75"
-                          onError={(e) => { e.target.src = 'https://via.placeholder.com/400x500?text=In+Memory'; }}
-                        />
-                      </div>
+        .poster-shadow {
+            box-shadow: 0 0 50px -12px rgba(249, 115, 22, 0.3);
+        }
+
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+    </style>
+</head>
+<body class="selection:bg-orange-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center font-bold text-xl shadow-lg shadow-orange-900/20">A</div>
+                <span class="font-black text-xl tracking-tighter hidden sm:block uppercase">Justice For Aman</span>
+            </div>
+            <div class="flex gap-1 sm:gap-4">
+                <button onclick="switchTab('home')" class="nav-link px-4 py-2 font-bold text-orange-500 border-b-2 border-orange-500 transition-all">Home</button>
+                <button onclick="switchTab('story')" class="nav-link px-4 py-2 font-bold text-gray-400 hover:text-white transition-all">The Case</button>
+                <button onclick="switchTab('action')" class="nav-link px-4 py-2 font-bold text-gray-400 hover:text-white transition-all">Take Action</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+        
+        <!-- Tab: Home -->
+        <section id="home" class="tab-content active">
+            <!-- Hero Section -->
+            <div class="relative px-6 py-20 overflow-hidden">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20 pointer-events-none">
+                    <div class="absolute inset-0 bg-orange-500/20 blur-[120px] rounded-full transform scale-150"></div>
+                </div>
+
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-widest">
+                            <i class="fas fa-shield-halved"></i> Seeking Truth & Accountability
+                        </div>
+                        <h1 class="text-6xl md:text-8xl font-black leading-none uppercase italic">
+                            Justice <br /> For <span class="gradient-text">Aman</span>
+                        </h1>
+                        <p class="text-xl text-neutral-400 leading-relaxed max-w-xl font-medium">
+                            The fight for Aman Basheer is a fight for the truth. Join thousands across the globe demanding a transparent investigation into the tragedy that took a bright young life.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                            <a href="#action" onclick="switchTab('action')" class="px-10 py-5 bg-orange-600 hover:bg-orange-500 rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 shadow-xl shadow-orange-900/40 transform hover:-translate-y-1">
+                                <i class="fas fa-heart"></i> SIGN THE PETITION
+                            </a>
+                            <button class="px-10 py-5 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                                <i class="fas fa-share-nodes"></i> SHARE STORY
+                            </button>
+                        </div>
+
+                        <div class="flex gap-12 items-center pt-8 border-t border-neutral-900">
+                            <div>
+                                <span class="block text-4xl font-black">52,481</span>
+                                <span class="text-xs text-neutral-500 uppercase font-bold tracking-widest">Supporters</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-3xl font-bold font-serif">#ഇരയോടൊപ്പം</span>
+                                <span class="text-xs text-neutral-500 uppercase font-bold tracking-widest">Standing With the Victim</span>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div className="h-1/3 bg-orange-600 p-6 flex flex-col justify-center items-center text-center">
-                    <h2 className="text-2xl font-black leading-none mb-1">JUSTICE FOR AMAN</h2>
-                    <p className="text-black font-bold text-sm tracking-widest mb-3">#ഇരയോടൊപ്പം</p>
-                    <div className="w-12 h-1 bg-black/30 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Secondary Image Badge */}
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-2xl border-4 border-neutral-950 bg-neutral-900 shadow-xl overflow-hidden hidden md:block">
-              <img 
-                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" 
-                alt="Portrait" 
-                className="w-full h-full object-cover"
-                onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Case Section */}
-      <section className="py-24 bg-neutral-900/50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-3xl md:text-5xl font-black uppercase italic">Understanding the Truth</h2>
-            <p className="text-neutral-400 max-w-2xl mx-auto">The details of Aman Basheer's case, updated with verified information to combat misinformation.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-neutral-950 p-8 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-colors group">
-              <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <AlertCircle size={28} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">What Happened</h3>
-              <p className="text-neutral-400 leading-relaxed">
-                Detailed timeline of the events leading up to the incident. We present the facts as verified by witnesses and independent investigators.
-              </p>
-              <button className="mt-6 text-orange-500 font-bold flex items-center gap-1 hover:gap-2 transition-all">
-                Read Full Story <ChevronRight size={18} />
-              </button>
-            </div>
-
-            <div className="bg-neutral-950 p-8 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-colors group">
-              <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <ShieldCheck size={28} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">Our Demands</h3>
-              <p className="text-neutral-400 leading-relaxed">
-                We are asking for a judicial inquiry, the suspension of involved parties during the investigation, and full access to evidence for the family.
-              </p>
-              <button className="mt-6 text-orange-500 font-bold flex items-center gap-1 hover:gap-2 transition-all">
-                View Demands <ChevronRight size={18} />
-              </button>
-            </div>
-
-            <div className="bg-neutral-950 p-8 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-colors group">
-              <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <MessageCircle size={28} />
-              </div>
-              <h3 className="text-xl font-bold mb-4">Family's Voices</h3>
-              <p className="text-neutral-400 leading-relaxed">
-                Direct statements from Aman's family members, including their plea for community support and their memories of Aman as a person.
-              </p>
-              <button className="mt-6 text-orange-500 font-bold flex items-center gap-1 hover:gap-2 transition-all">
-                Watch Statements <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Action Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-gradient-to-br from-neutral-900 to-black p-8 md:p-16 rounded-[3rem] border border-neutral-800 flex flex-col lg:flex-row items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-6xl font-black italic">നീതി ഉറപ്പാക്കുക</h2>
-              <p className="text-2xl font-bold text-orange-500 tracking-wide uppercase">Ensure Justice.</p>
-              <p className="text-lg text-neutral-400">
-                Your voice is our greatest strength. Every post shared, every signature collected, and every peaceful demonstration brings us one step closer to the truth.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-4 pt-4">
-                <div className="flex items-start gap-4 p-4 bg-neutral-800/50 rounded-2xl">
-                  <div className="p-2 bg-orange-600 rounded-lg"><Share2 size={20} /></div>
-                  <div>
-                    <h4 className="font-bold">Share Daily</h4>
-                    <p className="text-sm text-neutral-500">Post #JusticeForAman on Instagram and Twitter.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 bg-neutral-800/50 rounded-2xl">
-                  <div className="p-2 bg-orange-600 rounded-lg"><Mail size={20} /></div>
-                  <div>
-                    <h4 className="font-bold">Email Authorities</h4>
-                    <p className="text-sm text-neutral-500">Send pre-written letters to the district offices.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="w-full lg:w-[400px] space-y-4">
-              <div className="bg-orange-600 p-8 rounded-3xl shadow-xl shadow-orange-900/10">
-                <h3 className="text-2xl font-bold mb-4">Live Updates</h3>
-                <div className="space-y-6">
-                  {updates.map((update, idx) => (
-                    <div key={idx} className="border-l-2 border-black/20 pl-4 py-1">
-                      <span className="text-xs font-black uppercase text-black/60">{update.date}</span>
-                      <h4 className="font-bold text-lg leading-tight">{update.title}</h4>
-                      <div className="flex items-center gap-1 text-sm mt-1 opacity-80">
-                        <MapPin size={14} /> {update.location}
-                      </div>
+                    <div class="relative group">
+                        <div class="absolute -inset-4 bg-orange-600/20 blur-3xl rounded-full opacity-50"></div>
+                        <!-- Poster Representation -->
+                        <div class="relative bg-neutral-900 rounded-[2.5rem] overflow-hidden border border-neutral-800 shadow-2xl poster-shadow aspect-[4/5]">
+                            <div class="absolute inset-0 flex flex-col">
+                                <!-- Top: Image Area -->
+                                <div class="h-2/3 bg-neutral-800 relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent z-10"></div>
+                                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" 
+                                         alt="Aman Basheer" 
+                                         class="w-full h-full object-cover grayscale brightness-75 group-hover:scale-105 transition-transform duration-700"
+                                         onerror="this.src='https://via.placeholder.com/800x1000?text=In+Memory'">
+                                    
+                                    <!-- Circular frame overlay like the poster -->
+                                    <div class="absolute inset-0 flex items-center justify-center p-8 z-20">
+                                        <div class="w-full aspect-square rounded-full border-8 border-white/10 flex items-center justify-center overflow-hidden shadow-2xl">
+                                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" 
+                                                 class="w-full h-full object-cover"
+                                                 onerror="this.src='https://via.placeholder.com/400x400?text=Profile'">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Bottom: Slogan Area -->
+                                <div class="h-1/3 bg-orange-600 p-8 flex flex-col justify-center items-center text-center">
+                                    <h2 class="text-3xl font-black text-black leading-none mb-1 uppercase italic tracking-tighter">Justice For Aman</h2>
+                                    <p class="text-black font-black text-xl mb-4 tracking-widest">#ഇരയോടൊപ്പം</p>
+                                    <div class="w-16 h-1.5 bg-black/40 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-8 -left-8 w-40 h-40 rounded-3xl border-8 border-neutral-950 bg-neutral-900 shadow-2xl overflow-hidden hidden md:block z-30 transform -rotate-6">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://via.placeholder.com/150'">
+                        </div>
                     </div>
-                  ))}
                 </div>
-                <button className="w-full mt-8 py-3 bg-black text-white rounded-xl font-bold hover:bg-neutral-900 transition-colors">
-                  Join Newsletter
-                </button>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-neutral-900 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center font-bold">A</div>
-            <div>
-              <p className="font-bold tracking-tight">JUSTICE FOR AMAN BASHEER</p>
-              <p className="text-xs text-neutral-500">© 2026 Collective for Truth. All rights reserved.</p>
+            <!-- Solidarity Section -->
+            <section class="py-24 bg-neutral-900/30">
+                <div class="max-w-7xl mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-black mb-12 uppercase italic">Voices of Solidarity</h2>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="p-6 bg-neutral-950 rounded-2xl border border-neutral-800">
+                            <i class="fas fa-quote-left text-orange-500 text-3xl mb-4 opacity-50"></i>
+                            <p class="text-neutral-400 italic mb-4">"Justice delayed is justice denied. We stand with the family."</p>
+                            <span class="font-bold text-sm uppercase">— Community Leader</span>
+                        </div>
+                        <div class="p-6 bg-neutral-950 rounded-2xl border border-neutral-800">
+                            <i class="fas fa-quote-left text-orange-500 text-3xl mb-4 opacity-50"></i>
+                            <p class="text-neutral-400 italic mb-4">"A bright future was cut short. We need answers now."</p>
+                            <span class="font-bold text-sm uppercase">— Local Advocate</span>
+                        </div>
+                        <div class="p-6 bg-neutral-950 rounded-2xl border border-neutral-800">
+                            <i class="fas fa-quote-left text-orange-500 text-3xl mb-4 opacity-50"></i>
+                            <p class="text-neutral-400 italic mb-4">"The strength of a community is found in its pursuit of truth."</p>
+                            <span class="font-bold text-sm uppercase">— Student Union</span>
+                        </div>
+                        <div class="p-6 bg-neutral-950 rounded-2xl border border-neutral-800">
+                            <i class="fas fa-quote-left text-orange-500 text-3xl mb-4 opacity-50"></i>
+                            <p class="text-neutral-400 italic mb-4">"Every voice counts in this fight for accountability."</p>
+                            <span class="font-bold text-sm uppercase">— Volunteer</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Tab: Story -->
+        <section id="story" class="tab-content py-20 px-6">
+            <div class="max-w-4xl mx-auto space-y-16">
+                <div class="text-center space-y-4">
+                    <h2 class="text-5xl font-black uppercase italic">The Full Story</h2>
+                    <p class="text-orange-500 font-bold uppercase tracking-widest">Verified Facts & Timeline</p>
+                </div>
+
+                <div class="space-y-12">
+                    <div class="relative pl-12 border-l-2 border-orange-600/30 py-4">
+                        <div class="absolute -left-3 top-6 w-6 h-6 bg-orange-600 rounded-full border-4 border-neutral-950"></div>
+                        <span class="text-orange-500 font-black text-sm uppercase">Early 2026</span>
+                        <h3 class="text-2xl font-bold mt-1">A Life of Promise</h3>
+                        <p class="text-neutral-400 mt-3 leading-relaxed">Aman Basheer was known for his dedication to his studies and his vibrant personality. Friends and family describe him as a person who always looked out for others.</p>
+                    </div>
+
+                    <div class="relative pl-12 border-l-2 border-orange-600/30 py-4 bg-orange-500/5 rounded-r-3xl">
+                        <div class="absolute -left-3 top-6 w-6 h-6 bg-orange-600 rounded-full border-4 border-neutral-950 shadow-lg shadow-orange-500/20"></div>
+                        <span class="text-orange-500 font-black text-sm uppercase">The Incident</span>
+                        <h3 class="text-2xl font-bold mt-1">A Tragedy Unfolds</h3>
+                        <p class="text-neutral-400 mt-3 leading-relaxed font-semibold">The events of that day changed everything. Despite initial reports, several eyewitnesses have come forward with information that contradicts the official narrative.</p>
+                    </div>
+
+                    <div class="relative pl-12 border-l-2 border-orange-600/30 py-4">
+                        <div class="absolute -left-3 top-6 w-6 h-6 bg-orange-600 rounded-full border-4 border-neutral-950"></div>
+                        <span class="text-orange-500 font-black text-sm uppercase">Current Status</span>
+                        <h3 class="text-2xl font-bold mt-1">The Fight for Truth</h3>
+                        <p class="text-neutral-400 mt-3 leading-relaxed">Currently, we are pushing for an independent judicial committee to oversee the investigation. We believe transparency is the only way to find peace.</p>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-900 p-8 rounded-[2rem] border border-neutral-800">
+                    <h4 class="text-2xl font-bold mb-6 flex items-center gap-3 italic">
+                        <i class="fas fa-gavel text-orange-500"></i> Our Official Demands
+                    </h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                            <span>Immediate release of all CCTV footage from the surrounding area.</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                            <span>Formation of a Special Investigative Team (SIT) led by an unbiased official.</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <i class="fas fa-check-circle text-orange-500 mt-1"></i>
+                            <span>Protection for key witnesses who have stepped forward.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          
-          <div className="flex gap-6 text-neutral-400">
-            <a href="#" className="hover:text-orange-500 transition-colors"><MessageCircle size={24} /></a>
-            <a href="#" className="hover:text-orange-500 transition-colors"><Users size={24} /></a>
-            <a href="#" className="hover:text-orange-500 transition-colors"><Share2 size={24} /></a>
-          </div>
-          
-          <div className="text-sm text-neutral-500">
-            <a href="#" className="hover:underline">Legal Notice</a>
-            <span className="mx-2">•</span>
-            <a href="#" className="hover:underline">Privacy Policy</a>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
+        </section>
 
-export default App;
-#
+        <!-- Tab: Action -->
+        <section id="action" class="tab-content py-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="bg-gradient-to-br from-neutral-900 to-black p-8 md:p-16 rounded-[3rem] border border-neutral-800 flex flex-col lg:flex-row items-center gap-16 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                        <i class="fas fa-bullhorn text-[200px] -rotate-12"></i>
+                    </div>
+
+                    <div class="flex-1 space-y-8 relative z-10">
+                        <h2 class="text-4xl md:text-7xl font-black italic uppercase leading-none">നീതി <br>ഉറപ്പാക്കുക</h2>
+                        <p class="text-3xl font-bold text-orange-500 tracking-wider uppercase">Take Action Now</p>
+                        <p class="text-xl text-neutral-400 leading-relaxed max-w-xl">
+                            The louder our collective voice, the harder it is for the truth to be silenced. Your involvement today makes a direct impact on the case.
+                        </p>
+                        
+                        <div class="grid sm:grid-cols-2 gap-6 pt-6">
+                            <div class="p-6 bg-neutral-800/50 rounded-3xl border border-white/5 hover:border-orange-500/50 transition-all group">
+                                <div class="w-12 h-12 bg-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-pen-nib text-xl"></i>
+                                </div>
+                                <h4 class="text-lg font-bold">Sign Petition</h4>
+                                <p class="text-sm text-neutral-500 mt-2">Add your name to the official demand list for the state governor.</p>
+                            </div>
+                            <div class="p-6 bg-neutral-800/50 rounded-3xl border border-white/5 hover:border-orange-500/50 transition-all group">
+                                <div class="w-12 h-12 bg-orange-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <h4 class="text-lg font-bold">Email Authorities</h4>
+                                <p class="text-sm text-neutral-500 mt-2">Use our template to message the district police chief.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-[450px] space-y-6 relative z-10">
+                        <div class="bg-orange-600 p-10 rounded-[2.5rem] shadow-2xl shadow-orange-900/20 text-black">
+                            <h3 class="text-3xl font-black mb-6 italic uppercase">Live Feed</h3>
+                            <div class="space-y-8">
+                                <div class="relative pl-6 border-l-4 border-black/20">
+                                    <span class="text-xs font-black uppercase opacity-60">March 5, 2026</span>
+                                    <h4 class="font-black text-xl leading-tight mt-1">Solidarity Walk Planned</h4>
+                                    <p class="text-sm font-bold opacity-70 mt-1 uppercase"><i class="fas fa-location-dot"></i> Central Park Gate</p>
+                                </div>
+                                <div class="relative pl-6 border-l-4 border-black/20">
+                                    <span class="text-xs font-black uppercase opacity-60">March 3, 2026</span>
+                                    <h4 class="font-black text-xl leading-tight mt-1">Case Review Update</h4>
+                                    <p class="text-sm font-bold opacity-70 mt-1 uppercase"><i class="fas fa-file-contract"></i> Legal Counsel</p>
+                                </div>
+                                <div class="relative pl-6 border-l-4 border-black/20">
+                                    <span class="text-xs font-black uppercase opacity-60">Feb 28, 2026</span>
+                                    <h4 class="font-black text-xl leading-tight mt-1">Press Statement</h4>
+                                    <p class="text-sm font-bold opacity-70 mt-1 uppercase"><i class="fas fa-microphone"></i> Family Spokesperson</p>
+                                </div>
+                            </div>
+                            <button class="w-full mt-10 py-4 bg-black text-white rounded-2xl font-black text-lg hover:bg-neutral-900 tra
