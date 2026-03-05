@@ -1,0 +1,281 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Users, 
+  Share2, 
+  Mail, 
+  MapPin, 
+  Calendar, 
+  ShieldCheck, 
+  ExternalLink,
+  ChevronRight,
+  Heart,
+  MessageCircle,
+  AlertCircle
+} from 'lucide-react';
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState('home');
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Sections data
+  const updates = [
+    { date: 'March 5, 2026', title: 'Community Solidarity Walk', location: 'City Center', description: 'Join us as we walk in silence to honor Aman and demand transparency.' },
+    { date: 'March 2, 2026', title: 'Petition Reaches 50k Signatures', location: 'Online', description: 'The global community is standing with us. Keep sharing.' },
+    { date: 'Feb 28, 2026', title: 'Official Statement Issued', location: 'Press', description: 'The family released an official statement regarding the current status of the case.' },
+  ];
+
+  const NavItem = ({ id, label }) => (
+    <button
+      onClick={() => setActiveTab(id)}
+      className={`px-4 py-2 font-medium transition-all ${
+        activeTab === id 
+          ? 'text-orange-500 border-b-2 border-orange-500' 
+          : 'text-gray-400 hover:text-white'
+      }`}
+    >
+      {label}
+    </button>
+  );
+
+  return (
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-orange-500 selection:text-white">
+      {/* Navigation */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-neutral-900/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center font-bold text-lg">A</div>
+            <span className="font-bold text-xl tracking-tight hidden sm:block">JUSTICE FOR AMAN</span>
+          </div>
+          <div className="flex gap-2 sm:gap-6">
+            <NavItem id="home" label="Home" />
+            <NavItem id="story" label="The Case" />
+            <NavItem id="action" label="Take Action" />
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-10 pointer-events-none">
+           <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 to-transparent blur-3xl rounded-full transform scale-150"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8 relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-sm font-semibold uppercase tracking-wider">
+              <ShieldCheck size={16} />
+              Seeking Truth and Accountability
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black leading-tight uppercase">
+              Justice For <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">
+                Aman Basheer
+              </span>
+            </h1>
+            <p className="text-xl text-neutral-400 leading-relaxed max-w-xl">
+              Aman Basheer’s story is one of a bright future cut short. We demand a fair investigation, transparency from the authorities, and justice for a life that mattered.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="px-8 py-4 bg-orange-600 hover:bg-orange-500 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-900/20">
+                <Heart size={20} /> Sign the Petition
+              </button>
+              <button className="px-8 py-4 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl font-bold text-lg transition-all flex items-center justify-center gap-2">
+                <Share2 size={20} /> Spread the Word
+              </button>
+            </div>
+
+            <div className="flex gap-8 items-center pt-4">
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold">52.4K</span>
+                <span className="text-sm text-neutral-500 uppercase tracking-widest">Supporters</span>
+              </div>
+              <div className="w-px h-10 bg-neutral-800"></div>
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold">#ഇരയോടൊപ്പം</span>
+                <span className="text-sm text-neutral-500 uppercase tracking-widest font-sans">With the Victim</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-orange-600/20 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+            <div className="relative bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 shadow-2xl">
+              {/* Poster Representation */}
+              <div className="aspect-[4/5] bg-neutral-800 flex flex-col items-center justify-center relative overflow-hidden">
+                {/* Visual mock of the provided poster */}
+                <div className="absolute inset-0 bg-neutral-900">
+                  <div className="h-2/3 bg-neutral-800 relative">
+                    {/* Placeholder for Aman's photo */}
+                    <div className="absolute inset-0 flex items-center justify-center p-12">
+                      <div className="w-full h-full rounded-2xl border-4 border-white/10 flex items-center justify-center bg-neutral-700/50 backdrop-blur-sm overflow-hidden">
+                        <img 
+                          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" 
+                          alt="In Memory" 
+                          className="w-full h-full object-cover grayscale brightness-75"
+                          onError={(e) => { e.target.src = 'https://via.placeholder.com/400x500?text=In+Memory'; }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="h-1/3 bg-orange-600 p-6 flex flex-col justify-center items-center text-center">
+                    <h2 className="text-2xl font-black leading-none mb-1">JUSTICE FOR AMAN</h2>
+                    <p className="text-black font-bold text-sm tracking-widest mb-3">#ഇരയോടൊപ്പം</p>
+                    <div className="w-12 h-1 bg-black/30 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Secondary Image Badge */}
+            <div className="absolute -bottom-6 -left-6 w-32 h-32 rounded-2xl border-4 border-neutral-950 bg-neutral-900 shadow-xl overflow-hidden hidden md:block">
+              <img 
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=300" 
+                alt="Portrait" 
+                className="w-full h-full object-cover"
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Section */}
+      <section className="py-24 bg-neutral-900/50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16 space-y-4">
+            <h2 className="text-3xl md:text-5xl font-black uppercase italic">Understanding the Truth</h2>
+            <p className="text-neutral-400 max-w-2xl mx-auto">The details of Aman Basheer's case, updated with verified information to combat misinformation.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-neutral-950 p-8 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-colors group">
+              <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <AlertCircle size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">What Happened</h3>
+              <p className="text-neutral-400 leading-relaxed">
+                Detailed timeline of the events leading up to the incident. We present the facts as verified by witnesses and independent investigators.
+              </p>
+              <button className="mt-6 text-orange-500 font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                Read Full Story <ChevronRight size={18} />
+              </button>
+            </div>
+
+            <div className="bg-neutral-950 p-8 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-colors group">
+              <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <ShieldCheck size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Our Demands</h3>
+              <p className="text-neutral-400 leading-relaxed">
+                We are asking for a judicial inquiry, the suspension of involved parties during the investigation, and full access to evidence for the family.
+              </p>
+              <button className="mt-6 text-orange-500 font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                View Demands <ChevronRight size={18} />
+              </button>
+            </div>
+
+            <div className="bg-neutral-950 p-8 rounded-3xl border border-neutral-800 hover:border-orange-500/50 transition-colors group">
+              <div className="w-14 h-14 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <MessageCircle size={28} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Family's Voices</h3>
+              <p className="text-neutral-400 leading-relaxed">
+                Direct statements from Aman's family members, including their plea for community support and their memories of Aman as a person.
+              </p>
+              <button className="mt-6 text-orange-500 font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                Watch Statements <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Action Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-gradient-to-br from-neutral-900 to-black p-8 md:p-16 rounded-[3rem] border border-neutral-800 flex flex-col lg:flex-row items-center gap-12">
+            <div className="flex-1 space-y-6">
+              <h2 className="text-4xl md:text-6xl font-black italic">നീതി ഉറപ്പാക്കുക</h2>
+              <p className="text-2xl font-bold text-orange-500 tracking-wide uppercase">Ensure Justice.</p>
+              <p className="text-lg text-neutral-400">
+                Your voice is our greatest strength. Every post shared, every signature collected, and every peaceful demonstration brings us one step closer to the truth.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                <div className="flex items-start gap-4 p-4 bg-neutral-800/50 rounded-2xl">
+                  <div className="p-2 bg-orange-600 rounded-lg"><Share2 size={20} /></div>
+                  <div>
+                    <h4 className="font-bold">Share Daily</h4>
+                    <p className="text-sm text-neutral-500">Post #JusticeForAman on Instagram and Twitter.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 p-4 bg-neutral-800/50 rounded-2xl">
+                  <div className="p-2 bg-orange-600 rounded-lg"><Mail size={20} /></div>
+                  <div>
+                    <h4 className="font-bold">Email Authorities</h4>
+                    <p className="text-sm text-neutral-500">Send pre-written letters to the district offices.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="w-full lg:w-[400px] space-y-4">
+              <div className="bg-orange-600 p-8 rounded-3xl shadow-xl shadow-orange-900/10">
+                <h3 className="text-2xl font-bold mb-4">Live Updates</h3>
+                <div className="space-y-6">
+                  {updates.map((update, idx) => (
+                    <div key={idx} className="border-l-2 border-black/20 pl-4 py-1">
+                      <span className="text-xs font-black uppercase text-black/60">{update.date}</span>
+                      <h4 className="font-bold text-lg leading-tight">{update.title}</h4>
+                      <div className="flex items-center gap-1 text-sm mt-1 opacity-80">
+                        <MapPin size={14} /> {update.location}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="w-full mt-8 py-3 bg-black text-white rounded-xl font-bold hover:bg-neutral-900 transition-colors">
+                  Join Newsletter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 border-t border-neutral-900 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 bg-orange-600 rounded-full flex items-center justify-center font-bold">A</div>
+            <div>
+              <p className="font-bold tracking-tight">JUSTICE FOR AMAN BASHEER</p>
+              <p className="text-xs text-neutral-500">© 2026 Collective for Truth. All rights reserved.</p>
+            </div>
+          </div>
+          
+          <div className="flex gap-6 text-neutral-400">
+            <a href="#" className="hover:text-orange-500 transition-colors"><MessageCircle size={24} /></a>
+            <a href="#" className="hover:text-orange-500 transition-colors"><Users size={24} /></a>
+            <a href="#" className="hover:text-orange-500 transition-colors"><Share2 size={24} /></a>
+          </div>
+          
+          <div className="text-sm text-neutral-500">
+            <a href="#" className="hover:underline">Legal Notice</a>
+            <span className="mx-2">•</span>
+            <a href="#" className="hover:underline">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
